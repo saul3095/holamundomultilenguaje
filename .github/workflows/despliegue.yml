@@ -50,7 +50,7 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           
           # Use SSH to create the deploy path if it doesn't exist
-          ssh -o StrictHostKeyChecking=no $USERNAME@$HOST "mkdir -p $DEPLOY_PATH"
+          ssh -o StrictHostKeyChecking=no $USERNAME@$HOST "sudo mkdir -p $DEPLOY_PATH && sudo chown -R $USERNAME:$USERNAME $DEPLOY_PATH"
           
           # Sync the application files to the server
           rsync -avz --delete --no-t --exclude 'tests' --exclude '.git' . $USERNAME@$HOST:$DEPLOY_PATH
